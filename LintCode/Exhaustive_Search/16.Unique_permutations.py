@@ -7,7 +7,7 @@ class Solution:
     def permuteUnique(self, nums):
         alist = []
         result = []
-        visited = [i in range]
+        visited = [False] * len(nums)
         if not nums:
             return result
 
@@ -22,11 +22,11 @@ class Solution:
             ret.append([] + alist)
             return
 
-        for i, item in enumerate(nums):
-            if visited[i] or (i != 0 and nums[i] ==	 nums[i-1] and not visited[i-1]):
+        for i in range(len(nums)):
+            if visited[i] or (i != 0 and nums[i] == nums[i-1] and not visited[i-1]):
                 continue
             visited[i] = True
-            alist.append(item)
+            alist.append(nums[i])
             self.backTrack(nums, alist, visited, ret)
             alist.pop()
             visited[i] = False
@@ -42,7 +42,7 @@ class Solution2:
     # 2. 从后往前遍历，找到第一个比 a[k] 大的数 a[l]，即 a[k] < a[l]
     # 3. 交换 a[k] 与  a[l]
     # 4. 反转 k + 1 ~ n 之间的元素
-    def permute(self, nums):
+    def permuteUnique(self, nums):
         if nums is None:
             return []
         elif len(nums) <= 1:
@@ -73,6 +73,6 @@ class Solution2:
 
 
 if __name__ == '__main__':
-    s = Solution()
-    nums = [1, 2, 3]
+    s = Solution2()
+    nums = [1, 2, 2]
     print(s.permuteUnique(nums))
